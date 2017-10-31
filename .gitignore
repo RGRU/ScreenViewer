@@ -12,4 +12,5 @@
 !.eslintrc
 !.flowconfig
 !.gitignore
+!.travis.yml
 !README.md
