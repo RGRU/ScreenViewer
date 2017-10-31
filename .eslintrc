@@ -1,0 +1,466 @@
+// Легенда: в настройки передаются цифры, которые означают
+// 0 - не ошибка,
+// 1 - предупреждение
+// 2 - ошибка
+// За основу брал чеклист Рамблера https://github.com/rambler-digital-solutions/dotfiles/blob/master/.eslintrc
+
+{
+    "extends": ["eslint:recommended"],
+    "parser": "babel-eslint",
+
+    "plugins": [
+        "html",
+        "flowtype-errors"
+    ],
+
+    // Указываем, что глобальные переменные браузера и node существуют
+    "env": {
+        "browser": true,
+        "node": true
+    },
+
+    // Добавляем глобальные переменные
+    "globals": {
+        "Promise": true
+    },
+
+    // Правила для кода
+    "rules": {
+
+        // Линтинг flow
+        "flowtype-errors/show-errors": 2,
+
+        /*
+         * Лучшие практики, для качественного и хорошо поддерживаемого кода
+         *
+         */
+
+        // Не нужно указывать имя функции,
+        // при объявлении через переменную
+        // http://eslint.org/docs/rules/func-names
+        func-names: 0,
+
+        // Запрет вызывать функцию (класс), до ее определения
+        // http://eslint.org/docs/rules/no-use-before-define
+        "no-use-before-define": [2, {
+                "functions": true,
+                "classes": true
+            }
+        ],
+
+        // Запрет использовать одинаковые имена переменных,
+        // Даже если они используются во внутренних функциях
+        // В том числе запрещает именовать зарезервированными словами
+        // http://eslint.org/docs/rules/no-shadow
+        "no-shadow": [0, {
+                "builtinGlobals": true,
+
+                // разрешает использование одинаковых имен, внутри разных функций
+                "hoist": "functions",
+
+                // Разрешаем использовать такие название
+                allow: ["self", "event"]
+            }
+        ],
+
+        // Разрешаем переназначать переменную как саму себя
+        // В том числе и свойства
+        // http://eslint.org/docs/rules/no-self-assign
+        "no-self-assign": [0, {
+                "props": true
+            }
+        ],
+
+        // Запрещает использовать переменные, которые не используются в коде
+        // http://eslint.org/docs/rules/no-unused-vars
+        "no-unused-vars": [2, {
+
+                // Просматриваем только локальные переменные
+                "vars": "local",
+
+                // В функции просматривается только последняя переменная аргумента
+                "args": "after-used"
+            }
+        ],
+
+        // Запрещает присваивать переменные внутри условных конструкций и циклов
+        // http://eslint.org/docs/rules/no-cond-assign
+        "no-cond-assign": [2, "always"],
+
+        // Запрещаем использовать консоль
+        // https://eslint.org/docs/rules/no-console
+        "no-console": 1,
+
+        // Запрещаем использовать alert
+        // http://eslint.org/docs/rules/no-alert
+        "no-alert": 2,
+
+        // Запрещаем в условных конструкциях и циклах использовать
+        // константы булевого значения
+        // http://eslint.org/docs/rules/no-constant-condition
+        "no-constant-condition": 2,
+
+        // Запрещаем в объектах писать неудобовразумительные свойства
+        // примеры см. в документации
+        // http://eslint.org/docs/rules/no-dupe-keys
+        "no-dupe-keys": 2,
+
+        // Запрещаем в switch/case писать неудобовразумительные конструкции
+        // примеры см. в документации
+        // http://eslint.org/docs/rules/no-duplicate-case
+        "no-duplicate-case": 2,
+
+        // Запрещаем писать пустые конструкции
+        // http://eslint.org/docs/rules/no-empty
+        "no-empty": 2,
+
+        // Запрещаем в case переназначать передаваемый в него аргумент
+        // http://eslint.org/docs/rules/no-ex-assign
+        "no-ex-assign": 2,
+
+        // Разрешаем в конструкциях кода использовать автоприведение типа к boolean
+        // http://eslint.org/docs/rules/no-extra-boolean-cast
+        "no-extra-boolean-cast": 0,
+
+        // Ошибка, если используем ненужную кавычку
+        // http://eslint.org/docs/rules/no-extra-semi
+        "no-extra-semi": 2,
+
+        // Запрещает использовать имя функции, как другую переменную
+        // http://eslint.org/docs/rules/no-func-assign
+        "no-func-assign": 2,
+
+        // Запрещает установку функции и переменных во вложенных блоках кода
+        // http://eslint.org/docs/rules/no-inner-declarations
+        "no-inner-declarations": 2,
+
+        // Проверяет на валидность регулярных выражений
+        // http://eslint.org/docs/rules/no-invalid-regexp
+        "no-invalid-regexp": 2,
+
+        // Запрещает использовать различные пробельные символы
+        // http://eslint.org/docs/rules/no-irregular-whitespace
+        "no-irregular-whitespace": 2,
+
+        // Запрещает сохранение ссылки на глобальные функции (Math, JSON)
+        // http://eslint.org/docs/rules/no-obj-calls
+        "no-obj-calls": 2,
+
+        // Запрещает в массиве использовать пустое значение ([1,,2])
+        // http://eslint.org/docs/rules/no-sparse-arrays
+        "no-sparse-arrays": 2,
+
+        // Запрещает продолжать код, после return, throw и т.п.
+        // http://eslint.org/docs/rules/no-unreachable
+        "no-unreachable": 2,
+
+        // Запрещает проверку на нечисло (NaN) только через функцию isNaN
+        // http://eslint.org/docs/rules/use-isnan
+        "use-isnan": 2,
+
+        // Запрещает установку переменной в теле кода,
+        // Разрешается только в начале функции
+        // http://eslint.org/docs/rules/block-scoped-var
+        "block-scoped-var": 2,
+
+        // Запрещает неправильное использование return
+        // Подробнее: http://eslint.org/docs/rules/consistent-return
+        "consistent-return": 1,
+
+        // Обязывает всегда писать фигурные скобки в условиях
+        // http://eslint.org/docs/rules/curly
+        "curly": [2, "all"],
+
+        // Обязывает в switch использовать default case
+        // http://eslint.org/docs/rules/default-case
+        "default-case": 2,
+
+        // Запрещает использовать присвоение свойства объекта через нотацию массива,
+        // если свойство не является переменной (из-за неизбежных ошибок при минификации)
+        // http://eslint.org/docs/rules/dot-notation
+        "dot-notation": [2, {
+              "allowKeywords": true
+            }
+        ],
+
+        // Запрет использования нестрогих условий (==, != и т.п.)
+        // http://eslint.org/docs/rules/eqeqeq
+        "eqeqeq": 2,
+
+        // http://eslint.org/docs/rules/guard-for-in
+        "guard-for-in": 2,
+
+        // Запрет использования arguments.calle, это устаревший метод
+        // http://eslint.org/docs/rules/no-caller
+        "no-caller": 2,
+
+        // Предотвращает логические ошибки при использовании return в else
+        // http://eslint.org/docs/rules/no-else-return
+        "no-else-return": 2,
+
+        // Предотвращает нестрогое сравнение с null
+        // http://eslint.org/docs/rules/no-eq-null
+        "no-eq-null": 2,
+
+        // Запрещает использование eval
+        // http://eslint.org/docs/rules/no-eval
+        "no-eval": 2,
+
+        // Запрещает расширять нативные объекты (Object, String и т.п.)
+        // http://eslint.org/docs/rules/no-extend-native
+        "no-extend-native": 2,
+
+        // Предотвращает вызов метода bind там, где он не нужен
+        // http://eslint.org/docs/rules/no-extra-bind
+        "no-extra-bind": 2,
+
+        // Предотвращает случайное проваливание потока в switch/case
+        // http://eslint.org/docs/rules/no-fallthrough
+        "no-fallthrough": 2,
+
+        // Выдает ошибку, если в цифрах с плавающей запятой отсутствует ноль (.3, -.2)
+        // http://eslint.org/docs/rules/no-floating-decimal
+        "no-floating-decimal": 2,
+
+        // Предотвращает скрытое использование eval через таймауты
+        // http://eslint.org/docs/rules/no-implied-eval
+        "no-implied-eval": 2,
+
+        // Предотвращает простановку лишних фигурных скобок {}
+        // http://eslint.org/docs/rules/no-lone-blocks
+        "no-lone-blocks": 2,
+
+        // Предотвращает логические ошибки, приводящие к бесконечным циклам
+        // http://eslint.org/docs/rules/no-loop-func
+        "no-loop-func": 2,
+
+        // Предотвращает использование строки с переносом через обратный слеш
+        // http://eslint.org/docs/rules/no-multi-str
+        "no-multi-str": 2,
+
+        // Предотвращает переопределение нативных объектов (Object, String и т.п.)
+        // http://eslint.org/docs/rules/no-native-reassign
+        "no-native-reassign": 2,
+
+        // Запрещает использование конструктора функции new Function
+        // http://eslint.org/docs/rules/no-new-func
+        "no-new-func": 2,
+
+        // Предотвращает создание примитивных свойств через конструкторы (new String, new Number и т.п.)
+        // http://eslint.org/docs/rules/no-new-wrappers
+        "no-new-wrappers": 2,
+
+        // Запрет использования восьмиричной системы как цифры, можно только строкой (var a = "071")
+        // http://eslint.org/docs/rules/no-octal
+        "no-octal": 2,
+
+        // Запрещает использовать восьмиричные цифры в строке (var a = "hello \251")
+        // http://eslint.org/docs/rules/no-octal-escape
+        "no-octal-escape": 2,
+
+        // Запрещает перезанзвачение аргументов, переданных в функцию
+        // http://eslint.org/docs/rules/no-param-reassign
+        "no-param-reassign": 2,
+
+        // Запрет использования внутренней переменной __proto__
+        // http://eslint.org/docs/rules/no-proto
+        "no-proto": 2,
+
+        // Запрет использовать повторное объявление переменной
+        // http://eslint.org/docs/rules/no-redeclare
+        "no-redeclare": 2,
+
+        // Запрещает во время return выполнять присвоение переменной
+        // http://eslint.org/docs/rules/no-return-assign
+        "no-return-assign": 2,
+
+        // Запрет использования javascript: в href
+        // http://eslint.org/docs/rules/no-script-url
+        "no-script-url": 2,
+
+        // Запрет сравнения с самим собой
+        // http://eslint.org/docs/rules/no-self-compare
+        "no-self-compare": 2,
+
+        // Запрет использования запятой в умопомрачительных кейсах
+        // http://eslint.org/docs/rules/no-sequences
+        "no-sequences": 2,
+
+        // Использование throw только с объектом new Error
+        // http://eslint.org/docs/rules/no-throw-literal
+        "no-throw-literal": 2,
+
+        // Запрет использования конструкции with
+        // http://eslint.org/docs/rules/no-with
+        "no-with": 2,
+
+        // При использовании функции parseInt обязательно присутствие аргумента,
+        // который указывает систему счисления
+        // http://eslint.org/docs/rules/radix
+        "radix": 2,
+
+        // Объявление всех переменных должно быть только сверху конструкции
+        // http://eslint.org/docs/rules/vars-on-top
+        "vars-on-top": 2,
+
+        // Если мы вызываем функцию сразу после создания, то обязательно надо оборачивать в IIFE
+        // http://eslint.org/docs/rules/wrap-iife
+        "wrap-iife": [2, "any"],
+
+        // Сложно объяснить, читайте документацию ниже
+        // http://eslint.org/docs/rules/yoda
+        "yoda": 2,
+
+        /*
+         * Стилизация
+         */
+
+        // Только одинарные кавычки
+        // с проверкой эскейпинга в строках
+        // http://eslint.org/docs/rules/quotes
+        "quotes": [2, "single", "avoid-escape"],
+
+        // Отступы в 4 пробела + уровни отступов при switch/case
+        // http://eslint.org/docs/rules/indent
+        "indent": [2, 4, {
+                "SwitchCase": 1
+            }
+        ],
+
+        // Стилизация фигурных скобок в блоках кода
+        // с запретом писать в одну строку
+        // http://eslint.org/docs/rules/brace-style
+        "brace-style": [2, "1tbs", {
+                "allowSingleLine": false
+            }
+        ],
+
+        // Использование камелкейса в названии переменных
+        // http://eslint.org/docs/rules/camelcase
+        "camelcase": [2, {
+                "properties": "always"
+            }
+        ],
+
+        // Проверка на корректное написание запятой и пробела в перечислении
+        // http://eslint.org/docs/rules/comma-spacing
+        "comma-spacing": [2, {
+                "before": false,
+                "after": true
+            }
+        ],
+
+        // Запятая ставится после свойства, не первая в новой строке, подробнее по ссылке
+        // http://eslint.org/docs/rules/comma-style
+        "comma-style": [2, "last"],
+
+        // Обязательна хотя бы одна пустая строка в конце файла
+        // http://eslint.org/docs/rules/eol-last
+        "eol-last": 0,
+
+        // Отступы между двоеточием, разрешается только так { a: b }
+        // http://eslint.org/docs/rules/key-spacing
+        "key-spacing": [2, {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+
+        // Вызов конструктора только с большой буквы
+        // В том числе и если этот конструктор - свойство объекта
+        // http://eslint.org/docs/rules/new-cap
+        "new-cap": [2, {
+                "newIsCap": true,
+                "properties": true,
+
+                // Исключаем конструкторы из Ractive
+                "newIsCapExceptionPattern": "^Ractive",
+                "capIsNewExceptions": ["Deferred", "SeedrPlayer"]
+            }
+        ],
+
+        // Максимальное количество пустых строк между кодом (в нашем случае две)
+        // http://eslint.org/docs/rules/no-multiple-empty-lines
+        "no-multiple-empty-lines": [2, {
+                "max": 2
+            }
+        ],
+
+        // Запрет использования вложенных тернарных операций
+        // http://eslint.org/docs/rules/no-nested-ternary
+        "no-nested-ternary": 2,
+
+        // Запрет создания объекта через нативный new Object
+        // http://eslint.org/docs/rules/no-new-object
+        "no-new-object": 2,
+
+        // Запрет переноса строк между объявлением функции и ее вызовом
+        // http://eslint.org/docs/rules/no-spaced-func
+        "no-spaced-func": 2,
+
+        // ВЫКЛЮЧЕНО из-за неправильного вотчинга с webpack
+        // Запрет на пустые пробелы в строке (var a = 0;*****)
+        // Пробелы на пустых строках разрешаются
+        // http://eslint.org/docs/rules/no-trailing-spaces
+        /*"no-trailing-spaces": [2, {
+                "skipBlankLines": true
+            }
+        ],*/
+
+        // Не пропускает лишние скобки в коде
+        // http://eslint.org/docs/rules/no-extra-parens
+        "no-extra-parens": [2, "functions"],
+
+        // Разрешает использовать нижнее подчеркивание в именовании свойств и переменных
+        // http://eslint.org/docs/rules/no-underscore-dangle
+        "no-underscore-dangle": 0,
+
+        // Разрешает только одно декларирование переменных на конструкцию
+        // http://eslint.org/docs/rules/one-var
+        "one-var": [2, "always"],
+
+        // Разрешение расставлять переносы строк в блоках
+        // http://eslint.org/docs/rules/padded-blocks
+        "padded-blocks": [2, "always"],
+
+        // Проверка на простановку точки с запятой
+        // http://eslint.org/docs/rules/semi
+        "semi": [2, "always"],
+
+        // Пробелы перед и после запятыми (перед не нужен, после нужен)
+        // http://eslint.org/docs/rules/semi-spacing
+        "semi-spacing": [2, {
+                "before": false,
+                "after": true
+            }
+        ],
+
+        // Обязывает ставить пробелы между зарезервированными словами
+        // http://eslint.org/docs/rules/keyword-spacing
+        "keyword-spacing": 2,
+
+        // Обязывает ставить пробел перед объявлением блока
+        // http://eslint.org/docs/rules/space-before-blocks
+        "space-before-blocks": 2,
+
+        // Не нужен пробел между ключевым словом function и её объявлением ( var a = function() )
+        // http://eslint.org/docs/rules/space-before-function-paren
+        "space-before-function-paren": [2, "never"],
+
+        // Пробелы между операторами ( 1 + 2 )
+        // http://eslint.org/docs/rules/space-infix-ops
+        "space-infix-ops": 2,
+
+        // Отступы между комментариями
+        // http://eslint.org/docs/rules/spaced-comment
+        "spaced-comment": [2, "always",  {
+                "exceptions": ["*"], // Комментарий может состоять из этих символов
+                "markers": ["=", "!"] // Для поддержки sprockets directives (если честно сам не знаю как это будет)
+            }
+        ],
+
+        // Валидация jsDoc комментариев
+        // https://eslint.org/docs/rules/valid-jsdoc
+        "valid-jsdoc": 1
+    }
+}

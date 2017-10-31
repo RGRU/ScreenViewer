@@ -1,0 +1,21 @@
+[include]
+
+[ignore]
+<PROJECT_ROOT>/configs/.*
+<PROJECT_ROOT>/node_modules/.*
+<PROJECT_ROOT>/dest/.*
+
+[libs]
+# Подключаем определение всех глобальных модулей
+flow/libdef.js
+
+[options]
+# \([\/\.a-zA-Z-]\)+ это регулярка для любых модулей
+
+module.name_mapper='vue' -> '<PROJECT_ROOT>/flow/VueModule.js'
+module.name_mapper='vue-router' -> '<PROJECT_ROOT>/flow/VueRouterModule.js'
+module.name_mapper='ramda\([\/a-zA-Z]\)*' -> '<PROJECT_ROOT>/flow/RamdaModule.js'
+module.name_mapper='rxjs\([\/a-zA-Z]\)*' -> '<PROJECT_ROOT>/flow/RxjsModule.js'
+
+# Обработка VUE файлов
+module.name_mapper.extension='vue' -> '<PROJECT_ROOT>\/flow/VueModule.js'

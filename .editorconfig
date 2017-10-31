@@ -1,0 +1,17 @@
+# Общий конфигурационный файл для редакторов кода. editorconfig.org
+
+# корневой файл EditorConfig
+root = true
+
+# для всех файлов
+[*]
+
+# используем unix-совместимые переносы строк
+end_of_line = lf
+insert_final_newline = true
+
+# основные настройки
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true

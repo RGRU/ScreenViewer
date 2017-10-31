@@ -1,0 +1,9 @@
+{
+    "presets": ["env", "flow"],
+    "plugins": [
+        "transform-flow-strip-types",
+        "syntax-dynamic-import",
+        "transform-object-rest-spread"
+    ],
+    "compact": true
+}

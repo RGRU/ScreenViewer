@@ -1,0 +1,15 @@
+#Игнорировать ВСЕ
+
+/*
+
+#Не игнорировать это
+
+!/flow
+!/src
+
+!.babelrc
+!.editorconfig
+!.eslintrc
+!.flowconfig
+!.gitignore
+!README.md
