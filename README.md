@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/RGRU/ScreenViewer.svg?branch=master)](https://travis-ci.org/RGRU/ScreenViewer)
+
 # ScreenViewer
 Модуль определения типа экрана браузера при помощи RxJS.
 
