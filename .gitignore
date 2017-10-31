@@ -6,7 +6,10 @@
 
 !/flow
 !/src
+!/test
 
+!webpack.config.js
+!webpack.test.config.js
 !.babelrc
 !.editorconfig
 !.eslintrc
