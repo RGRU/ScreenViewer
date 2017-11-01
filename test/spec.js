@@ -14,6 +14,26 @@ describe('Модуль screenViewer.', () => {
 
     });
 
+    describe('# Метод setup.', () => {
+
+        it('Устанавливаем пользовательскую карту типов (screenMap). Должен вернуть новую карту', () => {
+
+            const userScreenMap = {
+                '768': 'mobile',
+                '990': 'tablet',
+                '1260': 'tabletLandscape',
+                '1760': 'desktop',
+                '1761': 'desktopFull'
+            };
+
+            screenViewer.setup(userScreenMap);
+
+            expect(screenViewer.getScreenMap()).to.eql(userScreenMap);
+
+        });
+
+    });
+
     describe('# Метод init.', () => {
 
         it('Должен передаваться массив. Проверка на то, что это поток пока нет.', () => {
