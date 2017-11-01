@@ -2,21 +2,21 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 # RxJS ScreenViewer
-Модуль определения типа экрана браузера при помощи RxJS. Код написан с использованием flow типизации.
+Module for definition screen type by RXJS. There is Flow in code.
 
-Зачем он нужен? Намного удобнее архитектура адаптивного сайта, построенная на изменении типов экрана, а не на изменении конкретных величин. Эта дополнительная абстракция дает плюс к масштабируемости и простоте поддержки адаптивной архитектуры.
+For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
 
-## Принцип работы
-Модуль определяет соответстиве некоей величины (в конкретном примере это ширина экрана), передаваемой ему, с типом экрана, которому удовлетворяет эта ширина.
+## How it works
+Module define some kind of size (in this case it's screen width), that it receive and compare it with needed screen type.
 
-Например в модуль передается величина 940, которой соответствует тип экрана tablet. Это видно из карты соответствия ниже. Если величина 1300, то это desktop.
+For example, module receive value 940, that corresponds screen type tablet. All corresponds values are shown below. If value is 1300, then it will be desktop.
 
 ```js
 /**
- * Карта типов разшенения, в зависимости от ширины экрана
+ * Screen types map
  * @type {Object}
  */
-screenMap = { // ВСЕ ЧТО МЕНЬШЕ И РАВНО
+screenMap = { // EVERYTHING IS LESS AND EQUAL
     '768': 'mobile',
     '990': 'tablet',
     '1260': 'tabletLandscape',
@@ -25,15 +25,15 @@ screenMap = { // ВСЕ ЧТО МЕНЬШЕ И РАВНО
 }
 ```
 
-Модуль работает с Rx потоками данных, в нашем случае потоками изменения ширины экрана браузера. Какие потоки прослушивать - решение разработчика.
+Module works by Rx streams. In our case it works with resizes of screen. Which is stream will be observable decide developer.
 
-В наиболее частых случаях хватает трех потоков из трех событий:
-    - Полная загрузка страницы (onload)
-    - Полная загрузка документа (DOMContentLoaded)
-    - Ресайз страницы (onresize)
+In common cases uses free streams by three events:
+    - Full page loaded (onload)
+    - Full document loaded (DOMContentLoaded)
+    - Resize screen (onresize)
 
-## Как подключить
-Подключаем модуль (он внутри использует RxJS, поэтому модуль должен быть доступен в окружении)
+## Usage
+Set module (it use RxJS, that why module shold be accessible in environment).
 
 index.js:
 
@@ -41,7 +41,7 @@ index.js:
 import screenViewer from './screenViewer';
 ```
 
-Если нужно - перенастраиваем карту типов по-умолчанию, методом setup.
+You can set up types map, if you need it.
 
 ```js
 screenViewer.setup({
@@ -51,7 +51,7 @@ screenViewer.setup({
 })
 ```
 
-В метод init$ передается массив потоков (например трех, описанных выше), с отфильтрованной велечиной ширины экрана
+init$ method receive array of streams filtered by size of screen.
 
 ```js
 import { Observable } from 'rxjs/Rx';
@@ -65,7 +65,7 @@ const targetEventList = [
 const screen$ = screenViewer.init$(targetEventList)
 ```
 
-Теперь мы можем подписаться на образованный модулем поток, который будет отправлять данные в тот момент, когда изменяется тип экрана
+Now we can subscribe to stream, that will change data in moment when type of screen changed.
 
 ```js
 screen$.subscribe(console.log)
