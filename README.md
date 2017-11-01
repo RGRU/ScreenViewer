@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/RGRU/ScreenViewer.svg?branch=master)](https://travis-ci.org/RGRU/ScreenViewer)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![Dependency Status](https://david-dm.org/RGRU/ScreenViewer.svg)](https://david-dm.org/RGRU/ScreenViewer.svg)
 [![devDependencies Status](https://david-dm.org/RGRU/ScreenViewer/dev-status.svg)](https://david-dm.org/RGRU/ScreenViewer.svg?type=dev)
 

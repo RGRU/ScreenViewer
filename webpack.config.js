@@ -52,7 +52,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dest'),
         host: '0.0.0.0',
-        port: 3030
+        port: 3030,
+        open: 'http://localhost:3030/'
     },
 
     // Включаю вотчер файлов watch: true
