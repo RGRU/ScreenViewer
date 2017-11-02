@@ -80,7 +80,7 @@ const
    */
   __init__ = (observableList: Array<any>): Object => {
     if (!Array.isArray(observableList) || observableList.length < 1) {
-      throw new Error(`Модуль ${__name__}, в метод init$, должен передаваться массив с потоком`)
+      throw new Error(`Module ${__name__}, to method init$, should pass an array with observables`)
     }
 
     let

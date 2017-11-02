@@ -46,5 +46,5 @@ const targetEventList = [
  */
 let screen$ = screenViewer.init$(targetEventList)
 
-// Прослушиваем изменения
+// Listen changes
 screen$.subscribe(console.log)
