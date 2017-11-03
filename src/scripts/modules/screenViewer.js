@@ -1,154 +1,164 @@
 // @flow
 
 /**
- * @fileOverview Модуль отпределения типа экрана.
- * Метод init возвращает поток изменений типа на который можно подписаться.
+ * @fileOverview Module for definition screen type by RxJS
+ * For why? More comfortably using adaptive site created by screen types, than using particular sizes.
+ * This addition absctract layer give to you flexible and maintainable.
+ * How it works? Module define some kind of size (in this case it's screen width), that it receive and compare it with needed screen type.
  *
- * @author Alex
+ * @author nanomen
  */
 
 import { Observable } from 'rxjs/Rx'
 
-let
+/**
+ * Type for screen map object
+ */
+type ScreenMapType = {
+  map: Object,
+  default: string
+}
 
-  /**
-   * Карта типов разшенения, в зависимости от ширины экрана
-   * @type {Object}
-  */
-  __screenMap__: Object = { // ВСЕ ЧТО МЕНЬШЕ И РАВНО
+/**
+ * Map of screen types dependensed of screen width
+ * @type {Object}
+*/
+let __screenMap__: ScreenMapType = {
+
+  // Common types
+  // Everything is less
+  map: {
     '768': 'mobile',
     '990': 'tablet',
     '1260': 'tabletLandscape',
-    '1760': 'desktop',
-    '1761': 'desktopFull'
+    '1760': 'desktop'
+  },
+
+  // Value as default
+  default: 'desktopFull'
+}
+
+/**
+ * Module name
+ * @type {String}
+ */
+const __name__: string = 'ScreenViewer'
+
+/**
+ * Get module name
+ * @return {String} module name
+ */
+const getModuleName = ():string => __name__
+
+/**
+ * Get common screen map
+ * @return {Object} map
+ */
+const getScreenMap = (): Object => __screenMap__.map
+
+/**
+ * Get default screen type
+ * @return {Object} default type
+ */
+const getScreenMapDefault = (): string => __screenMap__.default
+
+/**
+ * Setup user screen map
+ *
+ * @param  {Object} screenMap
+ *
+ * @return {Object} return new screen map
+ */
+const __setScreenMap__ = (screenMap: Object): Object => {
+  __screenMap__ = screenMap
+
+  return __screenMap__
+}
+
+/**
+ * Method for init module, call for init observer
+ *
+ * @param {Array} observableList список потоков, обрабатывая которые, нужно проверять ширину экрана
+ *                               по-умолчанию, передаем
+ *
+ *                               observable.on('load').map(() => window.innerWidth)
+ *                               observable.on('ready').map(event => event.target.innerWidth)
+ *                               observable.on('ready').map(event => event.target.innerWidth)
+ *
+ * @return {Rx} Поток изменяемой ширины и типов (приходит от совмещения других потоков)
+ *              изменяется только тогда, когда меняется значение типа
+ */
+const __init__ = (observableList: Array<any>): Object => {
+  if (!Array.isArray(observableList) || observableList.length < 1) {
+    throw new Error(`Module ${__name__}, to method init$, should pass an array with observables`)
   }
 
-const
+  /**
+    * Map of screen types
+    * @type {Object}
+    */
+  let screenMap = getScreenMap()
 
   /**
-   * Имя модуля
+   * Screen type as default
    * @type {String}
    */
-  __name__: string = 'ScreenViewer'
-
-const
+  let screenMapDefault = getScreenMapDefault()
 
   /**
-   * Получить имя модуля
-   * @return {String} имя модуля
-   */
-  getModuleName = ():string => __name__
+    * Observable from screen map
+    * @type {Rx}
+    */
+  let screenMap$
 
-const
-
-  /**
-   * Получить карту типов
-   *
-   * @return {Object} возвращаем карту типов
-   */
-  getScreenMap = (): Object => __screenMap__
-
-const
+  // Setup screen types flow
+  screenMap$ = Observable.from(
+    Object.keys(screenMap)
+  )
 
   /**
-   * Перезаписать карту типов
-   *
-   * @param  {Object} screenMap карта типов
-   *
-   * @return {Object} возвращаем обновленную карта типов
+   * Association observable of widths (from merge passed observables)
+   * @type {Rx}
    */
-  __setScreenMap__ = (screenMap: Object): Object => {
-    __screenMap__ = screenMap
+  return Observable
 
-    return __screenMap__
-  }
+    // merge flows
+    .merge(...observableList)
 
-const
+    // Filter null values (passed from first render page)
+    .filter(width => !!width)
 
-  /**
-   * Инициализация модуля, вызываем при первом использовании
-   *
-   * @param {Array} observableList список потоков, обрабатывая которые, нужно проверять ширину экрана
-   *                               по-умолчанию, передаем
-   *
-   *                               observable.on('load').map(() => window.innerWidth)
-   *                               observable.on('ready').map(event => event.target.innerWidth)
-   *                               observable.on('ready').map(event => event.target.innerWidth)
-   *
-   * @return {Rx} Поток изменяемой ширины и типов (приходит от совмещения других потоков)
-   *              изменяется только тогда, когда меняется значение типа
-   */
-  __init__ = (observableList: Array<any>): Object => {
-    if (!Array.isArray(observableList) || observableList.length < 1) {
-      throw new Error(`Module ${__name__}, to method init$, should pass an array with observables`)
-    }
+    // Переключаемся на поток из карты типов,
+    // передаем в него текущую ширину браузера
+    .switchMap(width => {
+      return screenMap$
 
-    let
+        // Фильтруем всех, кто больше, чем ширина браузера
+        .filter(widthOfMap => width < +widthOfMap)
 
-      /**
-        * Карта типов экрана
-        * @type {Object}
-        */
-      screenMap = getScreenMap()
+        // Преобразовываем значение в тип экрана,
+        // если передается значение пустое, значит нужно подставлять тип по-умолчанию
+        // говорит о том, что мы выше самой верхней границы типов
+        .map(widthOfMap => widthOfMap ? screenMap[widthOfMap] : widthOfMap)
 
-    let
+        // Если после фильтрации, значения нет, подставляем по-умолчанию (последний в списке)
+        .defaultIfEmpty(screenMapDefault)
 
-      /**
-        * Массив точек перехода для экрана
-        * @type {Array}
-        */
-      screenMapKeys
+        // Забираем первое значение из потока
+        .first()
 
-    let
+        // Преобразуем в результирующий объект с параметрами
+        .map(type => {
+          return {
+            width,
+            type
+          }
+        })
+    })
 
-      /**
-        * Поток из карты разрешений
-        * @type {Rx}
-        */
-      screenMap$
-
-    // Устанавливаем значения
-    screenMapKeys = Object.keys(screenMap)
-    screenMap$ = Observable.from(screenMapKeys)
-
-    /**
-     * Поток изменяемой ширины (приходит от совмещения других потоков)
-     * @type {Rx}
-     */
-    return Observable
-
-      // Совмещаем потоки
-      .merge(...observableList)
-
-      // Фильтруем пустые значения (появляются при первом событии браузера)
-      .filter(width => !!width)
-
-      // Переключаемся на поток из карты типов,
-      // передаем в него текущую ширину браузера
-      .switchMap(width => {
-        return screenMap$
-
-          // Фильтруем всех, кто больше, чем ширина браузера
-          .filter(widthOfMap => width < +widthOfMap)
-
-          // Если после фильтрации, значения нет, подставляем по-умолчанию (последний в списке)
-          .defaultIfEmpty(screenMapKeys[screenMapKeys.length - 1])
-
-          // Забираем первое значение из потока
-          .first()
-
-          // Преобразуем в результирующий объект с параметрами
-          .map(widthOfMap => {
-            return {
-              width,
-              type: screenMap[widthOfMap]
-            }
-          })
-      })
-
-      // Фильтруем, пропуская только уникальные значения
-      .distinctUntilChanged((prev, cur) => prev.type === cur.type)
-  }
+    // Фильтруем, пропуская только уникальные значения
+    .distinctUntilChanged((prev, cur) => prev.type === cur.type)
+}
 
 const
 
@@ -168,16 +178,19 @@ const
 
 export default {
 
-  // Получить имя модуля
+  // Get module name
   getModuleName,
 
-  // Получить карту типов
+  // Get common screen map
   getScreenMap,
 
-  // Установка пользовательской карты типов
+  // Get default screen type
+  getScreenMapDefault,
+
+  // Setup user screen map
   setup,
 
-  // Инициализация модуля
+  // module init
   init$: __init__
 
 }

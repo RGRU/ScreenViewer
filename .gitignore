@@ -17,3 +17,4 @@
 !.gitignore
 !.travis.yml
 !README.md
+!package.json

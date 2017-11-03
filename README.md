@@ -16,12 +16,18 @@ For example, module receive value 940, that corresponds screen type tablet. All 
  * Screen types map
  * @type {Object}
  */
-screenMap = { // EVERYTHING IS LESS AND EQUAL
-    '768': 'mobile',
-    '990': 'tablet',
-    '1260': 'tabletLandscape',
-    '1760': 'desktop',
-    '1761': 'desktopFull'
+screenMap = {
+
+    // Everything is less
+    map: {
+        '768': 'mobile',
+        '990': 'tablet',
+        '1260': 'tabletLandscape',
+        '1760': 'desktop'
+    },
+
+    // type as default
+    default: 'desktopFull'
 }
 ```
 
@@ -45,9 +51,15 @@ You can set up types map, if you need it.
 
 ```js
 screenViewer.setup({
-    '320': 'mobile',
-    '700': 'tablet',
-    '1200': 'desktop'
+
+    // Common types
+    map: {
+        '320': 'mobile',
+        '700': 'tablet'
+    },
+
+    // As default
+    default: 'desktop'
 })
 ```
 
