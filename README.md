@@ -5,13 +5,13 @@
 # RxJS ScreenViewer
 Module for definition screen type by RXJS. There is Flow in code.
 
+For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
+
 ## Installation
 ``` bash
 # install module
 npm install screen-viewer
 ```
-
-For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
 
 ## How it works
 Module define some kind of size (in this case it's screen width), that it receive and compare it with needed screen type.
