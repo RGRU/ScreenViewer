@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ScreenViewer demo</title>
+    <style>
+        .info {
+            font-family: monospace;
+            text-align: center;
+
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            padding: 10px;
+            box-shadow: 0 0 20px -5px rgba(0, 0, 0, .4);
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .info__title {
+            font-size: 23px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .info__subtitle {
+            font-size: 21px;
+            font-style: italic;
+        }
+
+        .info__mark {
+            font-size: 14px;
+        }
+
+        .info__meta {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .info__config {
+            font-size: 18px;
+            text-align: left;
+            margin: 10px;
+        }
+
+        .accent {
+            color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <div id="info" class="info">
+        <div class="info__title">Resize page</div>
+        <div class="info__meta">Screen type: <strong id="infoType" class="accent">...</strong></div>
+        <div class="info__meta">Screen width: <strong id="infoWidth" class="accent">...</strong></div>
+        <hr>
+        <div class="info__subtitle">
+            Config of types
+            <br>
+            <i class="info__mark">(everything is less)</i>
+        </div>
+        <ul class="info__config">
+            <li class="info__config-item">768: mobile</li>
+            <li class="info__config-item">990: tablet</li>
+            <li class="info__config-item">1260: tabletLandscape</li>
+            <li class="info__config-item">1760: desktop</li>
+            <li class="info__config-item">default: desktopFull</li>
+        </ul>
+    </div>
+<script type="text/javascript" src="main.js"></script></body>
+</html>
