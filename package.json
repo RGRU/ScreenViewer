@@ -1,8 +1,12 @@
 {
   "name": "screen-viewer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Module for getting screen type of screen width",
-  "author": "rg team",
+  "author": "RGRU team | nanomen <dev@rg.ru> (https://github.com/RGRU/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RGRU/ScreenViewer.git"
+  },
   "keywords": [
     "flow",
     "responsive",
@@ -10,6 +14,10 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/RGRU/ScreenViewer",
+  "bugs": {
+    "url": "https://github.com/RGRU/ScreenViewer/issues",
+    "email": "gugonamaster@yandex.ru"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
