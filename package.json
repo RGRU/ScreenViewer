@@ -51,7 +51,7 @@
     "rxjs": "^5.4.3"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "rm -rf dist webpack",
     "demo": "webpack --config webpack.demo.config.js",
     "demo:dev": "webpack-dev-server --config webpack.demo.config.js --progress",
     "fix": "eslint src/scripts/**/*.js --fix",
