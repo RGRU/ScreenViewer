@@ -8,12 +8,14 @@ Module for definition screen type by RXJS. There is Flow in code.
 For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
 
 # Installation
-```bash
+
+### ES6 via npm
+```sh
 npm i screen-viewer
 ```
-## Dependencies
+### Dependencies
 For compile code with babel, we should install package:
-```bash
+```sh
 # For using ES6 import
 npm i babel-plugin-syntax-dynamic-import
 
@@ -27,7 +29,7 @@ npm i babel-plugin-transform-flow-strip-types
 npm i babel-plugin-transform-object-rest-spread
 ```
 
-## How it works
+# How it works
 Module define some kind of size (in this case it's screen width), that it receive and compare it with needed screen type.
 
 For example, module receive value 940, that corresponds screen type tablet. All corresponds values are shown below. If value is 1300, then it will be desktop.
@@ -42,13 +44,11 @@ screenMap = {
     // Everything is less
     map: {
         '768': 'mobile',
-        '990': 'tablet',
-        '1260': 'tabletLandscape',
-        '1760': 'desktop'
+        '1280': 'tablet'
     },
 
     // type as default
-    default: 'desktopFull'
+    default: 'desktop'
 }
 ```
 
@@ -59,7 +59,7 @@ In common cases uses free streams by three events:
     - Full document loaded (DOMContentLoaded)
     - Resize screen (onresize)
 
-## Usage
+# Usage
 Set module (it use RxJS, that why module shold be accessible in environment).
 
 index.js:

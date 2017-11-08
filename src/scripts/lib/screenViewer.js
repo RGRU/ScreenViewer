@@ -29,13 +29,11 @@ let __screenMap__: ScreenMapType = {
   // Everything is less
   map: {
     '768': 'mobile',
-    '990': 'tablet',
-    '1260': 'tabletLandscape',
-    '1760': 'desktop'
+    '1280': 'tablet'
   },
 
   // Value as default
-  default: 'desktopFull'
+  default: 'desktop'
 }
 
 /**

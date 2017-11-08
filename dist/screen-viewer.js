@@ -5717,8 +5717,8 @@ Object.defineProperty(exports,"__esModule",{value:true});var _Rx=__webpack_requi
  * Type for screen map object
  */var __screenMap__={// Common types
 // Everything is less
-map:{'768':'mobile','990':'tablet','1260':'tabletLandscape','1760':'desktop'},// Value as default
-default:'desktopFull'/**
+map:{'768':'mobile','1280':'tablet'},// Value as default
+default:'desktop'/**
  * Module name
  * @type {String}
  */};var __name__='ScreenViewer';/**
