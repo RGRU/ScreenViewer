@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ScreenViewer demo</title>
+    <style>
+        .info {
+            font-family: monospace;
+
+            width: 300px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, .4);
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .info__title {
+            font-size: 21px;
+            font-style: italic;
+        }
+
+        .info__meta {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    ScreenViewer demo. Looking in devtools console
+    <div id="info" class="info">
+        <div class="info__title">Resize page</div>
+        <div class="info__meta">Screen type: <strong id="infoType">...</strong></div>
+        <div class="info__meta">Screen width: <strong id="infoWidth">...</strong></div>
+    </div>
+<script type="text/javascript" src="main.js"></script></body>
+</html>

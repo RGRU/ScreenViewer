@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import Rx from 'rxjs'
-import screenViewer from '../src/scripts/modules/screenViewer'
+import screenViewer from '../src/scripts/lib/screenViewer'
 
 describe('Module screenViewer.', () => {
   describe('# Method getModuleName.', () => {

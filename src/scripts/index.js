@@ -1,50 +1,60 @@
 import { Observable } from 'rxjs/Rx'
-import screenViewer from './modules/screenViewer'
+import screenViewer from './lib/screenViewer'
 
 /**
- * Список потоков, по изменению ширины страницы
- * @type {Array}
- */
-const targetEventList = [
-
-  /**
-   * Поток данных по событию полной загрузки страницы
-   * с фильтрацией корректной ширины
-   *
-   * @type {Rx}
-   */
-  Observable
-    .fromEvent(window, 'load')
-    .map(() => window.innerWidth),
-
-  /**
-   * Поток данных по событию DOMContentLoaded,
-   * когда весь DOM загружен
-   * с фильтрацией корректной ширины
-   *
-   * @type {Rx}
-   */
-  Observable
-    .fromEvent(document, 'DOMContentLoaded')
-    .map(event => event.target.innerWidth),
-
-  /**
-   * Поток данных по событию ресайза страницы
-   * с фильтрацией корректной ширины
-   *
-   * @type {Rx}
-   */
-  Observable
-    .fromEvent(window, 'resize')
-    .map(event => event.target.innerWidth)
-
-]
-
-/**
- * Инициализируем модуль, сохраняя поток изменения типов экрана
+ * Observable after full load page
+ *
  * @type {Rx}
  */
-let screen$ = screenViewer.init$(targetEventList)
+const load$ = Observable
+  .fromEvent(window, 'load')
+  .map(() => window.innerWidth)
+
+/**
+ * Observable from DOMContentLoaded event (as ready event jQuery)
+ *
+ * @type {Rx}
+ */
+const ready$ = Observable
+  .fromEvent(document, 'DOMContentLoaded')
+  .map(event => event.target.innerWidth)
+
+/**
+ * Observable from resize event
+ *
+ * @type {Rx}
+ */
+const resize$ = Observable
+  .fromEvent(window, 'resize')
+  .map(event => event.target.innerWidth)
+
+/**
+ * Init module
+ * @type {Rx}
+ */
+let screen$ = screenViewer.init$([ load$, ready$, resize$ ])
+
+/**
+ * Element for display type screen
+ * @type {DOM Node}
+ */
+let infoTypeEl = document.getElementById('infoType')
+
+/**
+ * Element for display width page
+ * @type {DOM Node}
+ */
+let infoWidthEl = document.getElementById('infoWidth')
 
 // Listen changes
-screen$.subscribe(console.log)
+screen$.subscribe(({ type }) => {
+  // Display info
+  infoTypeEl.innerHTML = type
+})
+
+// Listen screen changes
+Observable.merge(load$, resize$)
+  .subscribe(width => {
+    // Display screen width
+    infoWidthEl.innerHTML = width
+  })
