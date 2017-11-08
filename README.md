@@ -1,8 +1,15 @@
 [![Build Status](https://travis-ci.org/RGRU/ScreenViewer.svg?branch=master)](https://travis-ci.org/RGRU/ScreenViewer)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![npm version](https://badge.fury.io/js/screen-viewer.svg)](https://badge.fury.io/js/screen-viewer)
 
 # RxJS ScreenViewer
 Module for definition screen type by RXJS. There is Flow in code.
+
+## Installation
+``` bash
+# install module
+npm install screen-viewer
+```
 
 For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
 
@@ -68,13 +75,35 @@ init$ method receive array of streams filtered by size of screen.
 ```js
 import { Observable } from 'rxjs/Rx';
 
-const targetEventList = [
-    Observable.fromEvent(window, 'load'),
-    Observable.fromEvent(document, 'DOMContentLoaded'),
-    Observable.fromEvent(window, 'resize')
-]
+/**
+ * Observable after full load page
+ * @type {Rx}
+ */
+const load$ = Observable
+  .fromEvent(window, 'load')
+  .map(() => window.innerWidth)
 
-const screen$ = screenViewer.init$(targetEventList)
+/**
+ * Observable from DOMContentLoaded event (as ready event jQuery)
+ * @type {Rx}
+ */
+const ready$ = Observable
+  .fromEvent(document, 'DOMContentLoaded')
+  .map(event => event.target.innerWidth)
+
+/**
+ * Observable from resize event
+ * @type {Rx}
+ */
+const resize$ = Observable
+  .fromEvent(window, 'resize')
+  .map(event => event.target.innerWidth)
+
+/**
+ * Init module
+ * @type {Rx}
+ */
+const screen$ = screenViewer.init$([ load$, ready$, resize$ ])
 ```
 
 Now we can subscribe to stream, that will change data in moment when type of screen changed.

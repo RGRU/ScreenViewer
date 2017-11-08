@@ -5732,15 +5732,12 @@ var action=new VirtualAction(this.scheduler,this.work);this.add(action);return a
 "use strict";
 var _Rx=__webpack_require__(56);var _screenViewer=__webpack_require__(456);var _screenViewer2=_interopRequireDefault(_screenViewer);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/**
  * Observable after full load page
- *
  * @type {Rx}
  */var load$=_Rx.Observable.fromEvent(window,'load').map(function(){return window.innerWidth;});/**
  * Observable from DOMContentLoaded event (as ready event jQuery)
- *
  * @type {Rx}
  */var ready$=_Rx.Observable.fromEvent(document,'DOMContentLoaded').map(function(event){return event.target.innerWidth;});/**
  * Observable from resize event
- *
  * @type {Rx}
  */var resize$=_Rx.Observable.fromEvent(window,'resize').map(function(event){return event.target.innerWidth;});/**
  * Init module

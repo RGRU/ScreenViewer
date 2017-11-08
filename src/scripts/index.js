@@ -3,7 +3,6 @@ import screenViewer from './lib/screenViewer'
 
 /**
  * Observable after full load page
- *
  * @type {Rx}
  */
 const load$ = Observable
@@ -12,7 +11,6 @@ const load$ = Observable
 
 /**
  * Observable from DOMContentLoaded event (as ready event jQuery)
- *
  * @type {Rx}
  */
 const ready$ = Observable
@@ -21,7 +19,6 @@ const ready$ = Observable
 
 /**
  * Observable from resize event
- *
  * @type {Rx}
  */
 const resize$ = Observable

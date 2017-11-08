@@ -1,6 +1,6 @@
 {
   "name": "screen-viewer",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Module for getting screen type of screen width",
   "author": "RGRU team | nanomen <dev@rg.ru> (https://github.com/RGRU/)",
   "repository": {
