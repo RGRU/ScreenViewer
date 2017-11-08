@@ -1,10 +1,11 @@
 {
-  "name": "ScreenViewer",
+  "name": "screen-viewer",
   "version": "1.1.0",
   "description": "Module for getting screen type of screen width",
   "author": "rg team",
   "keywords": [
     "flow",
+    "responsive",
     "RxJS"
   ],
   "license": "MIT",
