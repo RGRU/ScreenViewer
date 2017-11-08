@@ -5,13 +5,11 @@ const
 
 module.exports = {
 
-    entry: {
-        index: path.join(__dirname, 'src/scripts/index.js')
-    },
+    entry: path.join(__dirname, 'src/scripts/modules/screenViewer.js'),
 
     output: {
-        path: path.join(__dirname, 'dest/scripts'),
-        filename: '[name].js',
+        path: path.join(__dirname, 'dist'),
+        filename: 'screen-viewer.js',
     },
 
     module: {
@@ -38,26 +36,26 @@ module.exports = {
 
     },
 
-    plugins: [
+    // plugins: [
 
-        new HtmlWebpackPlugin({
-            title: 'ScreenViewer demo',
-            desc: 'ScreenViewer demo. Looking in devtools console',
-            filename: path.join(__dirname, 'dest/index.html'),
-            template: 'src/index.html'
-        })
+    //     new HtmlWebpackPlugin({
+    //         title: 'ScreenViewer demo',
+    //         desc: 'ScreenViewer demo. Looking in devtools console',
+    //         filename: path.join(__dirname, 'dest/index.html'),
+    //         template: 'src/index.html'
+    //     })
 
-    ],
+    // ],
 
-    devServer: {
-        contentBase: path.join(__dirname, 'dest'),
-        host: '0.0.0.0',
-        port: 3030,
-        open: 'http://localhost:3030/'
-    },
+    // devServer: {
+    //     contentBase: path.join(__dirname, 'dest'),
+    //     host: '0.0.0.0',
+    //     port: 3030,
+    //     open: 'http://localhost:3030/'
+    // },
 
     // Включаю вотчер файлов watch: true
-    watch: true,
+    watch: false,
 
     // Настройки вотчера файлов
     watchOptions: {

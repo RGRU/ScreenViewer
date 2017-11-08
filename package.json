@@ -1,12 +1,13 @@
 {
   "name": "screen-viewer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Module for getting screen type of screen width",
   "author": "RGRU team | nanomen <dev@rg.ru> (https://github.com/RGRU/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RGRU/ScreenViewer.git"
   },
+  "main": "dist/screen-viewer.js",
   "keywords": [
     "flow",
     "responsive",
@@ -50,8 +51,7 @@
     "rxjs": "^5.4.3"
   },
   "scripts": {
-    "t": "rm dest",
-    "build": "rm -rf dest && webpack",
+    "build": "webpack",
     "fix": "eslint src/scripts/**/*.js --fix",
     "start": "webpack",
     "start:dev": "webpack-dev-server --progress",
