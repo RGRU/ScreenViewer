@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("VueSticker", [], factory);
+	else if(typeof exports === 'object')
+		exports["VueSticker"] = factory();
+	else
+		root["VueSticker"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -12336,3 +12346,4 @@ var switchAll_1=__webpack_require__(136);exports.switchAll=switchAll_1.switchAll
 
 /***/ })
 /******/ ]);
+});

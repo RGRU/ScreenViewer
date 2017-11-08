@@ -10,6 +10,9 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'screen-viewer.js',
+        libraryTarget: 'umd',
+        library: 'VueSticker',
+        umdNamedDefine: true
     },
 
     module: {
