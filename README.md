@@ -65,7 +65,11 @@ Set module (it use RxJS, that why module shold be accessible in environment).
 index.js:
 
 ```js
-import screenViewer from './screenViewer';
+// ES6 modules
+import screenViewer from 'screen-viewer';
+
+// or CommonJS
+const screenViewer = require('screen-viewer').default;
 ```
 
 You can set up types map, if you need it.
