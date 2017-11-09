@@ -29,6 +29,28 @@ npm i babel-plugin-transform-flow-strip-types
 npm i babel-plugin-transform-object-rest-spread
 ```
 
+### ScreenViewer as global object in browser
+```js
+// Pass to your html page
+
+// Include RxJS library
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+
+// Include screen-viewer module
+<script src="https://unpkg.com/screen-viewer/dist/global/screen-viewer.min.js"></script>
+```
+And use in you scripts some as:
+```js
+var resize$ = Rx.Observable
+  .fromEvent(window, 'resize')
+  .map(function(event) { return event.target.innerWidth });
+
+ScreenViewer.init$([ resize$ ])
+  .subscribe(function(e) {
+    console.log(e)
+  });
+```
+
 # How it works
 Module define some kind of size (in this case it's screen width), that it receive and compare it with needed screen type.
 

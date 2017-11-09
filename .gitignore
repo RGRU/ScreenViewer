@@ -1,10 +1,9 @@
-#Игнорировать ВСЕ
+# Ignore all
 
 /*
 
-#Не игнорировать это
+#Not ignore below
 
-!/flow
 !/src
 !/docs
 !/dist

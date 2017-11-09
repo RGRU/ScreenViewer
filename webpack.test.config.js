@@ -38,6 +38,15 @@ module.exports = {
         ]
     },
 
-    plugins: [ new flowtypePlugin() ]
+    plugins: [
+
+        new flowtypePlugin(),
+
+        new webpack.ProvidePlugin({
+            // Enable as globals rule for eslint
+            'Rx': 'rxjs/Rx'
+        })
+
+    ]
 
 };

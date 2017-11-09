@@ -9,7 +9,7 @@
  * @author nanomen
  */
 
-import { Observable } from 'rxjs/Rx'
+// import Rx from 'rxjs'
 
 /**
  * Type for screen map object
@@ -110,7 +110,7 @@ const __init__ = (observableList: Array<any>): Object => {
   let screenMap$
 
   // Setup screen types flow
-  screenMap$ = Observable.from(
+  screenMap$ = Rx.Observable.from(
     Object.keys(screenMap)
   )
 
@@ -118,7 +118,7 @@ const __init__ = (observableList: Array<any>): Object => {
    * Association observable of widths (from merge passed observables)
    * @type {Rx}
    */
-  return Observable
+  return Rx.Observable
 
     // merge flows
     .merge(...observableList)
