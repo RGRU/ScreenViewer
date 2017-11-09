@@ -30,7 +30,7 @@ npm i babel-plugin-transform-object-rest-spread
 ```
 
 ### ScreenViewer as global object in browser
-```js
+```html
 // Pass to your html page
 
 // Include RxJS library
