@@ -10,6 +10,7 @@
 !/test
 
 !webpack.config.js
+!webpack.demo.config.js
 !webpack.test.config.js
 !.babelrc
 !.editorconfig
