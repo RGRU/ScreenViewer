@@ -30,13 +30,12 @@ npm i babel-plugin-transform-object-rest-spread
 ```
 
 ### ScreenViewer as global object in browser
+Pass to your html page code below
 ```html
-// Pass to your html page
-
-// Include RxJS library
+<!-- Include RxJS library -->
 <script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
 
-// Include screen-viewer module
+<!-- Include screen-viewer module -->
 <script src="https://unpkg.com/screen-viewer/dist/global/screen-viewer.min.js"></script>
 ```
 And use in you scripts some as:
