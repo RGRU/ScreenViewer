@@ -1,6 +1,6 @@
 {
   "name": "screen-viewer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Module for getting screen type of screen width",
   "author": "RGRU team | nanomen <dev@rg.ru> (https://github.com/RGRU/)",
   "repository": {
@@ -8,6 +8,10 @@
     "url": "git+https://github.com/RGRU/ScreenViewer.git"
   },
   "main": "dist/screen-viewer.js",
+  "unpkg": "dist/global/screen-viewer.min.js",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "flow",
     "tools",
