@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/screen-viewer.svg)](https://badge.fury.io/js/screen-viewer)
 
 # RxJS ScreenViewer
-Module for definition screen type by RXJS. There is Flow in code.
+Module for definition screen type by RxJS.
 
 For why? More comfortably using adaptive site created by screen types, than using particular sizes. This addition absctract layer give to you flexible and maintainable.
 
@@ -13,22 +13,6 @@ For why? More comfortably using adaptive site created by screen types, than usin
 ```sh
 npm i screen-viewer
 ```
-### Dependencies
-For compile code with babel, we should install package:
-```sh
-# For using ES6 import
-npm i babel-plugin-syntax-dynamic-import
-
-# For compile with flowtype
-npm i babel-preset-flow
-
-# For strip flowtype declarations
-npm i babel-plugin-transform-flow-strip-types
-
-# Module use object spread operator
-npm i babel-plugin-transform-object-rest-spread
-```
-
 ### ScreenViewer as global object in browser
 Pass to your html page code below
 ```html
